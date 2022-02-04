@@ -1,11 +1,43 @@
 package com.guirms.eventoApp.models;
 
-public class Evento {
+import java.io.Serializable;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
+public class Evento implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
 	private String nome;
 	private String local;
 	private String data;
 	private String horario;
+
+	public Evento() {
+	}
+
+	public Evento(String nome, String local, String data, String horario) {
+		this.nome = nome;
+		this.local = local;
+		this.data = data;
+		this.horario = horario;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getNome() {
 		return nome;
