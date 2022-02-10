@@ -1,7 +1,10 @@
 package com.guirms.eventoApp.controllers;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -10,7 +13,7 @@ import com.guirms.eventoApp.models.Evento;
 import com.guirms.eventoApp.repositories.eventoRepository;
 
 @Controller
-public class EventoController {
+public class EventoControllers {
 	
 	@Autowired
 	eventoRepository eventoRepo;	
@@ -32,9 +35,15 @@ public class EventoController {
 		Iterable<Evento> eventos = eventoRepo.findAll();
 		mv.addObject("eventos", eventos);
 		return mv;
-		
 	}
 	
+	@RequestMapping("/{codigo}")
+	public ModelAndView detalhesEvento(@PathVariable("codigo") Long id) {
+		Optional<Evento> evento = eventoRepo.findById(id);
+		ModelAndView mv = new ModelAndView("DetalhesEvento");
+		mv.addObject("evento", evento);
+		return mv;
+	}
 	
 	
 	
