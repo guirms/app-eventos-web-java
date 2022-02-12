@@ -1,11 +1,15 @@
 package com.guirms.eventoApp.models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Evento implements Serializable {
@@ -20,6 +24,20 @@ public class Evento implements Serializable {
 	private String local;
 	private String data;
 	private String horario;
+
+	@OneToMany//(mappedBy = "evento")
+	private List<Convidado> convidado = new ArrayList<>();
+
+	public Evento() {
+	}
+
+	public Evento(Long codigo, String nome, String local, String data, String horario) {
+		this.codigo = codigo;
+		this.nome = nome;
+		this.local = local;
+		this.data = data;
+		this.horario = horario;
+	}
 
 	public Long getCodigo() {
 		return codigo;
@@ -59,6 +77,27 @@ public class Evento implements Serializable {
 
 	public void setHorario(String horario) {
 		this.horario = horario;
+	}
+	
+	public List<Convidado> getConvidado() {
+		return convidado;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(codigo);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Evento other = (Evento) obj;
+		return Objects.equals(codigo, other.codigo);
 	}
 
 }

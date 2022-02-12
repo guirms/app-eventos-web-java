@@ -27,8 +27,15 @@
 			<p>Local:<span th:text="${eventos.local}"></span></p>
 			<p>Data:<span th:text="${eventos.data}"></span></p>
 			<p>Horario:<span th:text="${eventos.horario}"></span></p>
-
 		</div>
+
+		<form method="POST">
+			Nome: <input type="text" value="" name="nomeConvidado" />
+			Rg: <input type="text" value="" name="rg" />
+			<button class="waves-effect waves-light btn" type="submit">Adicionar</button>
+		</form>
+
+
 	</div>
 
 
