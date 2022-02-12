@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.guirms.eventoApp.models.Convidado;
 import com.guirms.eventoApp.models.Evento;
+import com.guirms.eventoApp.repositories.convidadoRepository;
 import com.guirms.eventoApp.repositories.eventoRepository;
 
 @Controller
@@ -15,6 +17,9 @@ public class EventoControllers {
 	
 	@Autowired
 	eventoRepository eventoRepo;	
+	
+	@Autowired
+	convidadoRepository convidadoRepo;	
 	
 	@RequestMapping(value = "/cadastrarEvento", method = RequestMethod.GET)
 	public String eventoForm() {
@@ -35,12 +40,20 @@ public class EventoControllers {
 		return mv;
 	}
 
-	@RequestMapping("/{codigo}")
+	@RequestMapping(value = "/{codigo}", method = RequestMethod.GET)
 	public ModelAndView detalhesEvento(@PathVariable("codigo") Long codigo) {
 		Evento eventos = eventoRepo.findByCodigo(codigo);
 		ModelAndView mv = new ModelAndView("evento/eventoDetalhes");
 		mv.addObject("eventos", eventos); // o que se usa como referencia é esse segundo "eventos"
 		return mv;
+	}
+	
+	@RequestMapping(value = "/{codigo}", method = RequestMethod.POST)
+	public String detalhesEventoPost(@PathVariable("codigo") Long codigo, Convidado convidado) {
+		Evento evento = eventoRepo.findByCodigo(codigo);
+		convidado.setEvento(evento);
+		convidadoRepo.save(convidado);
+		return "redirect:/{codigo}";
 	}
 
 }
