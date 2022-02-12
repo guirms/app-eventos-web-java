@@ -1,7 +1,5 @@
 package com.guirms.eventoApp.controllers;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,23 +27,20 @@ public class EventoControllers {
 		return "redirect:/cadastrarEvento";
 	}
 	
-	@RequestMapping(value = "/eventos")
+	@RequestMapping("/eventos")
 	public ModelAndView listaEventos() {
 		ModelAndView mv = new ModelAndView("index");
 		Iterable<Evento> eventos = eventoRepo.findAll();
 		mv.addObject("eventos", eventos);
 		return mv;
 	}
-	
+
 	@RequestMapping("/{codigo}")
-	public ModelAndView detalhesEvento(@PathVariable("codigo") Long id) {
-		Optional<Evento> evento = eventoRepo.findById(id);
-		ModelAndView mv = new ModelAndView("DetalhesEvento");
-		mv.addObject("evento", evento);
+	public ModelAndView detalhesEvento(@PathVariable("codigo") Long codigo) {
+		Evento eventos = eventoRepo.findByCodigo(codigo);
+		ModelAndView mv = new ModelAndView("evento/eventoDetalhes");
+		mv.addObject("eventos", eventos); // o que se usa como referencia é esse segundo "eventos"
 		return mv;
 	}
-	
-	
-	
 
 }
