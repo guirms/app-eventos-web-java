@@ -45,6 +45,8 @@ public class EventoControllers {
 		Evento eventos = eventoRepo.findByCodigo(codigo);
 		ModelAndView mv = new ModelAndView("evento/eventoDetalhes");
 		mv.addObject("eventos", eventos); // o que se usa como referencia é esse segundo "eventos"
+		Iterable<Convidado> convidados = convidadoRepo.findByEvento(eventos);
+		mv.addObject("convidados", convidados);
 		return mv;
 	}
 	
