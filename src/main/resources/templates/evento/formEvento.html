@@ -15,19 +15,25 @@
 
 	<!--Let browser know website is optimized for mobile-->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+		<link rel="stylesheet" href="style/styleCSS.css"/>
 </head>
 
 <body>
-
-	<h1>Cadastro de eventos: </h1>
-	<h3><a href="/eventos" class="waves-effect waves-light btn"><i
-				class="material-icons left">format_list_bulleted</i>Lista de eventos</a></h3>
-
+	<header>
+		<nav>
+			<div class="nav-wrapper">
+				<a href="#" class="brand-logo">Cadastro de eventos</a>
+				<ul id="nav-mobile" class="right hide-on-med-and-down">
+					<li><a href="/eventos" class="waves-effect waves-light btn"><i
+								class="material-icons left">format_list_bulleted</i>Lista de eventos</a></li>
+				</ul>
+			</div>
+		</nav>
+	</header>
 	<div th:if="${flashMessage != null}">
 		<div th:replace="MensagemValidacao :: alert (type=${flashType}, message=${flashMessage})"></div>
 	</div>
-	
+	<div class="container formEvento">
 	<form class="container" method="POST">
 		Nome: <input type="text" value="" name="nome" />
 		<div class="input-field col s6">
