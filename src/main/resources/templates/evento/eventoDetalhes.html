@@ -29,9 +29,13 @@
 			<p>Horario:<span th:text="${eventos.horario}"></span></p>
 		</div>
 
-		<form method="POST">
-			Nome: <input type="text" value="" name="nomeConvidado" />
-			Rg: <input type="text" value="" name="rg" />
+		<div th:if="${flashMessage != null}">
+			<div th:replace="MensagemValidacao :: alert (type=${flashType}, message=${flashMessage})"></div>
+		</div>
+
+		<form method="POST" th:object="${convidado}">
+			Nome: <input type="text" value="" name="nomeConvidado" placeholder="Nome Completo" />
+			Rg: <input type="text" value="" name="rg" placeholder="RG" class="validate" />
 			<button class="waves-effect waves-light btn" type="submit">Adicionar</button>
 		</form>
 	</div>

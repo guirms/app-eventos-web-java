@@ -6,6 +6,8 @@ import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Convidado implements Serializable {
@@ -13,7 +15,10 @@ public class Convidado implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@NotNull
 	private Integer rg;
+	
+	@NotEmpty
 	private String nomeConvidado;
 
 	@ManyToOne // mutios convidados para um evento
