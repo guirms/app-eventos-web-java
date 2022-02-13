@@ -23,19 +23,24 @@
 	<h1>Cadastro de eventos: </h1>
 	<h3><a href="/eventos" class="waves-effect waves-light btn"><i
 				class="material-icons left">format_list_bulleted</i>Lista de eventos</a></h3>
-	<form class="container" method="POST">
-		Nome: <input type="text" value="" name="nome"/>
-			<div class="input-field col s6">
-				Local: <input type="text" value="" name="local"/>
-			</div>
-			<div class="input-field col s3">
-				Data: <input type="date" value="" name="data"/>
-			</div>
-			<div class="input-field col s3">
-				Horario: <input type="time" value="" name="horario"/>
-			</div>
-		<button class="waves-effect waves-light btn" type="submit">Salvar</button>
+
+	<div th:if="${flashMessage != null}">
+		<div th:replace="MensagemValidacao :: alert (type=${flashType}, message=${flashMessage})"></div>
+	</div>
 	
+	<form class="container" method="POST">
+		Nome: <input type="text" value="" name="nome" />
+		<div class="input-field col s6">
+			Local: <input type="text" value="" name="local" />
+		</div>
+		<div class="input-field col s3">
+			Data: <input type="date" value="" name="data" />
+		</div>
+		<div class="input-field col s3">
+			Horario: <input type="time" value="" name="horario" />
+		</div>
+		<button class="waves-effect waves-light btn" type="submit">Salvar</button>
+
 	</form>
 
 	<!--JavaScript at end of body for optimized loading-->

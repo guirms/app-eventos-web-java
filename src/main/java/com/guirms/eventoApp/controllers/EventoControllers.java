@@ -31,9 +31,17 @@ public class EventoControllers {
 	}
 
 	@RequestMapping(value = "/cadastrarEvento", method = RequestMethod.POST)
-	public String eventoForm(Evento evento) {
-		eventoRepo.save(evento);
-		return "redirect:/cadastrarEvento";
+	public String eventoForm(@Valid Evento evento, BindingResult result, RedirectAttributes attributes) {
+		if (result.hasErrors()) {
+			attributes.addFlashAttribute("flashMessage", "Verifique os campos!");
+			attributes.addFlashAttribute("flashType", "danger");
+			return "redirect:/cadastrarEvento";
+		} else {
+			eventoRepo.save(evento);
+			attributes.addFlashAttribute("flashMessage", "Evento adicionado com sucesso!");
+			attributes.addFlashAttribute("flashType", "success");
+			return "redirect:/cadastrarEvento";
+		}
 	}
 
 	@RequestMapping("/eventos")
@@ -55,8 +63,8 @@ public class EventoControllers {
 	}
 
 	@RequestMapping(value = "/{codigo}", method = RequestMethod.POST)
-	public String detalhesEventoPost(@PathVariable("codigo") Long codigo, @Valid Convidado convidado, BindingResult result,
-			RedirectAttributes attributes) {
+	public String detalhesEventoPost(@PathVariable("codigo") Long codigo, @Valid Convidado convidado,
+			BindingResult result, RedirectAttributes attributes) {
 		if (result.hasErrors()) {
 			attributes.addFlashAttribute("flashMessage", "Verifique os campos!");
 			attributes.addFlashAttribute("flashType", "danger");

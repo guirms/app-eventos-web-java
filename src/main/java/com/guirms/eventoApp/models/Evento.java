@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 public class Evento implements Serializable {
@@ -20,9 +21,16 @@ public class Evento implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
 
+	@NotEmpty
 	private String nome;
+	
+	@NotEmpty
 	private String local;
+	
+	@NotEmpty
 	private String data;
+	
+	@NotEmpty
 	private String horario;
 
 	@OneToMany//(mappedBy = "evento")
