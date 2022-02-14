@@ -21,7 +21,7 @@ public class Convidado implements Serializable {
 	@NotEmpty
 	private String nomeConvidado;
 
-	@ManyToOne // mutios convidados para um evento
+	@ManyToOne // muitos convidados para um evento
 	private Evento evento;
 
 	public Convidado() {
