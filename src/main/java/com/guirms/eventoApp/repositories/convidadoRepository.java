@@ -8,5 +8,6 @@ import com.guirms.eventoApp.models.Evento;
 public interface convidadoRepository extends JpaRepository<Convidado, Long> {
 	
 	Iterable<Convidado> findByEvento(Evento evento);
+	Convidado findByRg(Integer rg);
 	
 }

@@ -78,4 +78,21 @@ public class EventoControllers {
 			return "redirect:/{codigo}";
 		}
 	}
+	
+	@RequestMapping("/deletarEvento")
+	public String deletarEvento(Long codigo) {
+		Evento evento = eventoRepo.findByCodigo(codigo);
+		eventoRepo.delete(evento);
+		return "redirect:/eventos";
+	}
+	
+	@RequestMapping("/deletarConvidado")
+	public String deletarConvidado(Integer rg) {
+		Convidado convidado = convidadoRepo.findByRg(rg);
+		convidadoRepo.delete(convidado);
+		Evento evento = convidado.getEvento();
+		Long codigoLong = evento.getCodigo();
+		String codigoString = "" + codigoLong;
+		return "redirect:/" + codigoString;
+	}
 }
